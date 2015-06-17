@@ -40,7 +40,9 @@ Next we see three blocks that are about commands and their limits within the sco
 
 Click Create at the bottom of the main view to create you first service plan!
 
-![Service Plan Complete](img/Image1.8.png)
+![Service Plan Complete](img/Image1.8.a.png)
+![Service Plan Complete](img/Image1.8.b.png)
+![Service Plan Complete](img/Image1.8.c.png)
   
   <a name="Anonymous"></a>
 ## Creating an Anonymous Trial
