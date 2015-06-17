@@ -18,8 +18,7 @@
 
 * [Chapter 3 – Subscriptions](chapter3.md#Chapter3)
   - [3.1 – Creating a subscription Service Plan](chapter3.md#Step1)
-  - [3.2 – Modifying Commands and rules](chapter3.md#Step2)
-  - [3.3 – Creating a subscription](chapter3.md#Step3)
+  - [3.2 – Creating a subscription](chapter3.md#Step2)
   
 * [Chapter 4 – The Client API](chapter4.md#Chapter4)
   - [4.1 – A Basic Client class layout](chapter4.md#Step1)

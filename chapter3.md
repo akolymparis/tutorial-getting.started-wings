@@ -2,85 +2,61 @@
 # Chapter 3 – Subscriptions
 
   - [3.1 – Creating a subscription Service Plan](chapter3.md#Step1)
-  - [3.2 – Modifying Commands and rules](chapter3.md#Step2)
-  - [3.3 – Creating a subscription](chapter3.md#Step3)
+  - [3.2 – Creating a subscription](chapter3.md#Step2)
   
-Creating a plan that allows a period of using the product for free for testing purposes is a common practice. To create a Trial you need to create a service plan with proper values in some fields. Since Trials are free no subscription needs to be active in order for a user to atempt to activate her workstation, so a 'free subscription' with the properties of the trial service plan is automatically created when a workstation successfully begins a Trial period. 
+We have seen how to create a service plan that supports Trial activations but not how to create subscription based plans. The procedure has two main steps. One is to create an appropriate service plan just like before only with some different properties. The other is to create the actual subscriptions. Why should we create these subscriptions here though? The idea is that Wings is a platform that helps manage License behaviour, activation, expiration, command limits etc. It is not a platform for managing payments. That can be any external platform, which, once the data is collected or the payment made, can signal the renewal of (or activation or any action required on) a subscription. With this in mind, subscriptions that require payment to be created cannot be created directly from the end user's client. Once the subscription has been approved and created though, the user will receive a registration key which he can use through the client to activate his workstation. Because this is a tutorial about using the licensing system we assume that the process of subscription creation at some external tool has been completed so we create a sample subscription [here](chapter3.md#Step3) to cover for that scenario.
   
   
-  <a name="Registered"></a>
-## Creating a Registered Trial
+  <a name="Step1"></a>
+## 3.1 – Creating a subscription Service Plan
 
-Registration ties workstations under the service plan that require it to a user email. So to create a Trial that requires registration you need to follow the next steps to create an appropriate service plan:
-
-Click on “Service Plans” on the side menu to open the sub menu if you haven't done so already. Now click on “Create New Service Plan”. The main view changes again to present us with new blocks that categorize aspects of a service plan. Something interesting to notice here is that in the “Commands” block you can see the two commands we created previously in the application's scope, and no option for the creation of a new command. That is because commands must always be defined in the scope of the entire application and can only be overriden within the scope of service plans.
-Besides commands there are some other things we can determine about a service plan, and although they seem like a few options they provide us with great versatility.
+Click on “Service Plans” on the side menu to open the sub menu select “Create New Service Plan”.
 
 ![Basic Service Plan Configuration](img/Image1.7.a.png)
 
 In the Basic Configuration block we have a few options:
 
-* Define the name of the service plan.
-* Determine the visibility of the service plan. This determines whether the service plan will be included in a list of service plans returned from the server when the client asks for the available service plans. Public means it is returned, and private means it is not.
-* Evaluation mode indicates, when set to “yes”, that the service plan is a Trial service plan.
-* Finally as the name implies, “Requires Registration” indicates whether the system requires additional info from the end user to confirm his identity and finalize the subscription. Note that how this additional info is collected and what exactly is collected is left to the developer of the software, BUT an email is required in order for the user to receive a confirmation code.
+* Set the name of the service plan to "60 Day Subscription".
+* Set the visibility of the service plan to "private".
+* Set Evaluation mode to “no”, indicating the service  is subscription based.
+* Finally, “Requires Registration” should be set to "No" for this example. If we wanted to require registration for the subscription we could select it, but for simplicity and because we see how this works for the Registered Trial already it is better to leave as "no".
 
-In the Name field enter an appropriate name. We will name it “15 Day Trial”. Under visibility check “Public” and under Evaluation Mode check “Yes”. Finally, since this one will be a registered trial, check “Yes” under Requires Registration.
-Next we need to define how many days each subscription created with this service plan has until expiration. Under the Duration block adjust the value of the Duration In Days field, setting it to 15. Note that a value of '0' means that subscriptions will never be active (they are created expired) and an empty value means that there is no expiration so subscriptions are active ad-infinitum.
+Next we need to define how many days each subscription created with this service plan has until expiration. Under the Duration block adjust the value of the Duration In Days field, setting it to 60. Note that a value of '0' means that subscriptions will never be active (they are created expired) and an empty value means that there is no expiration so subscriptions are active ad-infinitum.
 
 ![Duration](img/Image1.7.b.png)
 
-The ”Activations” block provides some more options for control on the behavior of each subscription of this service plan. Specifically it allows us to limit the number of workstations that can be activated using one such subscription (“Max Activations”) and furthermore if we so wish we can also limit the number of activated workstations that can work at the same time (“Max Concurrent Checkouts”). For example a subscription may allow for 10 workstation activations but only 5 can work at the same time. Obviously the number of concurrent checkouts needs to be less than or equal to the number of Max Activations. For this service plan set both values to 1. 
+The ”Activations” block provides some more options for control on the behavior of each subscription of this service plan. Specifically it allows us to limit the number of workstations that can be activated using one such subscription (“Max Activations”) and furthermore if we so wish we can also limit the number of activated workstations that can work at the same time (“Max Concurrent Checkouts”). For example a subscription may allow for 10 workstation activations but only 5 can work at the same time. Obviously the number of concurrent checkouts needs to be less than or equal to the number of Max Activations. In fact input these example numbers respectively to the appropriate fields now. 
 
 ![Activations](img/Image1.7.c.png)
 
-Next we see three blocks that are about commands and their limits within the scope of the current service plan. We do not need to change anything here for now.
-
-![Commands](img/Image1.7.d.png)
-![Overriding Commands](img/Image1.7.e.png)
-![Limits](img/Image1.7.f.png)
-
-Click Create at the bottom of the main view to create you first service plan!
- 
-![Service Plan Complete](img/Image1.8.a.png)
-![Service Plan Complete](img/Image1.8.b.png)
-![Service Plan Complete](img/Image1.8.c.png)
+In the commands section below we don't need to change anything, since we do not want to limit anything for this normal subscription.
+Click Create at the bottom of the main view to create the service plan!
   
-  <a name="Anonymous"></a>
-## Creating an Anonymous Trial
+  <a name="Step2"></a>
+## 3.2 – Creating a subscription
 
-If you need to provide users with a quick way to test your product without them having to worry about providing personal information you will want to create an Anonymous Trial.
+Select “60 Day Subscription” from the side menu. At the top of the main view you will see four buttons as seen in (Image 1.11). Go Ahead and click the Create Subscription button. 
 
-Click on “Service Plans” on the side menu to open the sub menu if you haven't done so already. Now click on “Create New Service Plan”. The main view changes again to present us with new blocks that categorize aspects of a service plan. Something interesting to notice here is that in the “Commands” block you can see the two commands we created previously in the application's scope, and no option for the creation of a new command. That is because commands must always be defined in the scope of the entire application and can only be overriden within the scope of service plans.
-Besides commands there are some other things we can determine about a service plan, and although they seem like a few options they provide us with great versatility.
+![Subscription Buttons](img/Image1.11.png)
 
-![Basic Service Plan Configuration](img/Image1.7.a.png)
+The main view will change yet again and a few blocks will appear. At this point most are not important except two: Select Active under State in Basic Configuration and select an activation period under  the "Activation Period" block. 
 
-In the Basic Configuration block we have a few options:
-	* Define the name of the service plan.
-	* Determine the visibility of the service plan. This determines whether the service plan will be included in a list of service plans returned from the server when the client asks for the available service plans. Public means it is returned, and private means it is not.
-	* Evaluation mode indicates, when set to “yes”, that the service plan is a Trial service plan.
-	* Finally as the name implies, “Requires Registration” indicates whether the system requires additional info from the end user to confirm his identity and finalize the subscription. Note that how this additional info is collected and what exactly is collected is left to the developer of the software, BUT an email is required in order for the user to receive a confirmation code.
+![New Subscription](img/Image1.12.png)
 
-In the Name field enter an appropriate name. We will name it “5 Day Anonymous Trial”. Under visibility check “Public” and under Evaluation Mode check “Yes”. Finally,  check “No” under Requires Registration.
-Next we need to define how many days each subscription created with this service plan has until expiration. Under the Duration block adjust the value of the Duration In Days field, setting it to 5.
+The  Activation Period is defined by two date values that designate the start of the activation and the expiration. What we can understand from this is that a subscription is active during a specific period of time, specified by the activation period. Whether a workstation is activated with this subscription or not during this period doesn't really affect the expiration.
 
-![Duration](img/Image1.7.b.png)
+Now scroll down to the bottom and hit “Create”. 
+If you click the “View Subscriptions” button (Image 1.11) you will be presented with a list of the subscriptions currently under this service plan. If everything went as planned you will see the subscription you just created. You will also notice that the subscription is identified by a Key. This is the key the user must receive in order to activate his workstation via the client. Clicking on the key will take you to similar main view with the one we saw while creating the subscription. 
 
-Set both values in the Activations block to 1. 
+There are three differences:
+* 1. There are two buttons on the top right. One for saving changes and one for deleting the subscription.
+* 2. You can see the Key in the Basic subscription configuration block.
+* 3. At the bottom there is another block that contains information on the workstations currently (if any) activated with this subscription.
 
-![Activations](img/Image1.7.c.png)
 
-Next we see three blocks that are about commands and their limits within the scope of the current service plan.
-
-![Commands](img/Image1.7.d.png)
-![Overriding Commands](img/Image1.7.e.png)
-![Limits](img/Image1.7.f.png)
-
-//TODO: add limits to import command.
-
-Click Create at the bottom of the main view to create you first service plan!
+And that's about it. We have pinned down the basic functionality of the web console and we can now create, edit and manage applications, service plans/subscriptions and resources/commands.
+In the next part we will see how to implement a client that communicates with the platform.
 
 =========================
-[Next](chapter3.md#Chapter3) -
+[Next](chapter4.md#Chapter4) -
 [Home](README.md)
