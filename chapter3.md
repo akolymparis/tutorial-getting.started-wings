@@ -1,8 +1,9 @@
-<a name="Chapter2"></a>
-# Chapter 2 – Free Trials
+<a name="Chapter3"></a>
+# Chapter 3 – Subscriptions
 
-  - [Creating a Registered Trial](chapter2.md#Registered)
-  - [Creating an Anonymous Trial](chapter2.md#Anonymous)
+  - [3.1 – Creating a subscription Service Plan](chapter3.md#Step1)
+  - [3.2 – Modifying Commands and rules](chapter3.md#Step2)
+  - [3.3 – Creating a subscription](chapter3.md#Step3)
   
 Creating a plan that allows a period of using the product for free for testing purposes is a common practice. To create a Trial you need to create a service plan with proper values in some fields. Since Trials are free no subscription needs to be active in order for a user to atempt to activate her workstation, so a 'free subscription' with the properties of the trial service plan is automatically created when a workstation successfully begins a Trial period. 
   
