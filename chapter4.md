@@ -128,10 +128,8 @@ Now everything is in place for us to start implementing the actual client functi
 Out of those, the two we need to discuss first in order to get our client going are **InitWorkstation** and **GetServiceStatus**.
 The first is a very important call and it is actually the first call we need to make when beginning our session. In essence it asks the server to check if the workstation is activated with a license and everything is OK to proceed. Besides the start of the session there are a few more points at which we have to make this call, like after attempting a subscription activation with a positive response, in order to complete the activation process. The return value is boolean to define success or failure. If the call fails it means there are errors, which we can retrieve with **Client.GetErrors()** and we can show them to the user if we want.
 
-Let's create the method that will be called to begin the session when the client starts. In case that there are errors we display them and return false. The call to InitWorkstation is the bread and butter here. If it is successful it means that the server is ready and the workstation has been activated. If not, then either there is some internal server error or the client was not found under the specific subscription meaning it needs activation.
-
 ```c#
-public bool StartClient()
+public bool SignIn()
 {
 	// Initialize the workstation
 	if (!Client.InitWorkstation())
@@ -146,8 +144,7 @@ public bool StartClient()
 **GetServiceStatus** on the other hand can be called whenever we need to check with the status of the server. Progress of requests, errors, failures in requests or successful calls are all described by an arithmetic number returned by this method. It also has an out parameter that returns more specific info in the well known by now dictionary format. The status is returned as an *int* code and it is a best practice to keep their handling within the scope of the client class and hidden from the UI and the final user.
 
 
-Then go back to the SampleClient class and create the method that will handle server status codes. We'll call it CheckoutWorkstation, and it's purpose will be to ask the servers for its current status and to distinguish between status codes, take proper action if we want and return the appropriate value from the enumerator. This will actually be the most central call of the client. It should be called after a request to the server that has a chance to fail and it should be called whenever we want to check if the workstation checks out. What does that mean? It means that the workstation has asked the server “Do I have an active license in your records?” and the server responded “yes”.
-In any other case, we will see some soon, or if the server has faced some internal problem then the workstation doesn't or cannot checkout and the method handles the status and returns accordingly.
+Then go back to the SampleClient class and create the method that will handle server status codes. We'll call it DetermineState, and it's purpose will be to ask the servers for its current status and to distinguish between status codes, take proper action if we want and return the appropriate value from the enumerator. This will actually be the second most central call of the client. It should be called after a request to the server that has a chance to fail and it should be called whenever we need to know how to interact with the user, what to request from her or what to present on the screen.
 
 ```c#
 /// <summary>
@@ -160,7 +157,7 @@ In any other case, we will see some soon, or if the server has faced some intern
 /// Not provided by the Api, it was created for the scope
 /// of the tutorial.
 /// </returns>
-public SampleActivationStates SignIn(
+public SampleActivationStates DetermineState(
             bool showErrors = true,
             bool showResponse = true)
 {
@@ -231,14 +228,7 @@ public bool ConfirmRegisteredTrial(string confirmationCode)
 		return false;
 	}
 
-	// Call InitWorkstation() again to complete the INIT phase
-	if (!Client.InitWorkstation())
-	{
-		Display.ShowErrors(Client.GetErrors(), "INIT");
-		return false;
-	}
-
-	return true;
+	return SignIn();
 }
 ```
 > Note that after returning from these nethods, a call to **SignIn()** is desirable, especially when there is need to manage client states.
@@ -266,14 +256,7 @@ public bool StartAnonymousTrial()
 		return false;
 	}
 
-	// Call InitWorkstation() again to complete the INIT phase
-	if (!Client.InitWorkstation())
-	{
-		Display.ShowErrors(Client.GetErrors(), "INIT");
-		return false;
-	}
-
-	return true;
+	return SignIn();
 }
 ```
 
@@ -294,14 +277,7 @@ public bool StartSubscription(string subscriptionReference)
 		return false;
 	}
 
-	// Call InitWorkstation() again to complete the INIT phase
-	if (!Client.InitWorkstation())
-	{
-		Display.ShowErrors(Client.GetErrors(), "INIT");
-		return false;
-	}
-
-	return true;
+	return SignIn();
 }
 ```
 
