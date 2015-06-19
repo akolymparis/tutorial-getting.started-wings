@@ -662,6 +662,7 @@ Within the WorkstationClient api, there are methods that can help you reset this
 if something went wrong, but it isn't in the scope of this beginner tutorial to go too deeply in these things.
 
 Congratulations, you have created your first Wings licensed and managed plugin! Test it out, play with the code, try the api and our support team is present for every questions you may have!
+
 =========================
 [Next](chapter5.md#Chapter5) -
 [Home](README.md)
