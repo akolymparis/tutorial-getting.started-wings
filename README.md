@@ -28,9 +28,9 @@
   - [4.5 – Activating a Subscription](chapter4.md#Step5)
 
 * [Chapter 5 – The Plugin](chapter5.md#Chapter5)
-  - [5.1 – ...](chapter5.md#Step1)
-  - [5.2 – ...](chapter5.md#Step2)
-  - [5.3 – ...](chapter5.md#Step3)
+  - [5.1 – Setting up the environment](chapter5.md#Step1)
+  - [5.2 – Creating the AutoCad Command class](chapter5.md#Step2)
+  - [5.3 – Adding Wings functionality to the Plugin](chapter5.md#Step3)
   
 * [Appendix A – More sample and demos](appendixa.md)
 
